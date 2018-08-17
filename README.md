@@ -28,8 +28,8 @@ $my_qubic = "GAPGBVIBDKTGZ9BVLCZYWPZAFMIXBDLCUTXOC9NEJ9HGDKZYGRPQVIHMZXRXCDLZIFX
 try {
     $res = $qlite->qubic_read($my_qubic);
     echo "qubic code: $res[code]";
-} catch (Exception $err) {
-    echo "an exception occured: $err";
+} catch (Exception $exc) {
+    echo "an exception occured: $exc";
 }
 ```
 # API DOCUMENTATION
