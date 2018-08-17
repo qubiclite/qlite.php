@@ -21,7 +21,7 @@ class Qlite {
         curl_close($ch);
 
         if(!$answer['success']) {
-            throw new Error($answer['error']);
+            throw new Exception($answer['error']);
         }
 
         return $answer;
@@ -30,42 +30,42 @@ class Qlite {
     private static function validate_tryte_sequence($value, $par_name, $min_length, $max_length) {
         Qlite::validate_string($value, $par_name);
         if(!preg_match('/^[A-Za-z9]*$/', $value))
-            throw new Error("parameter '".$par_name."' contains illegal characters, only trytes (A-Z,9) are allowed");
+            throw new Exception("parameter '".$par_name."' contains illegal characters, only trytes (A-Z,9) are allowed");
         if (strlen($value) < $min_length)
-            throw new Error("length of parameter '".$par_name."' (".strlen($value).") is less than allowed minimum ($min_length)");
+            throw new Exception("length of parameter '".$par_name."' (".strlen($value).") is less than allowed minimum ($min_length)");
         if (strlen($value) > $max_length)
-            throw new Error("parameter '".$par_name."' (".strlen($value).") is greater than allowed maximum ($max_length)");
+            throw new Exception("parameter '".$par_name."' (".strlen($value).") is greater than allowed maximum ($max_length)");
 
     }
 
     private static function validate_integer($value, $par_name, $min, $max) {
         if(!is_numeric($value))
-            throw new Error("parameter '".$par_name."' is not a number");
+            throw new Exception("parameter '".$par_name."' is not a number");
         if ($value < $min)
-            throw new Error("parameter '".$par_name."' (= $value) is less than allowed minimum: $min");
+            throw new Exception("parameter '".$par_name."' (= $value) is less than allowed minimum: $min");
         if ($value > $max)
-            throw new Error("parameter '".$par_name."' (= $value) is greater than allowed maximum: $max");
+            throw new Exception("parameter '".$par_name."' (= $value) is greater than allowed maximum: $max");
     }
 
     private static function validate_string($value, $par_name) {
         if(!is_string($value))
-            throw new Error("parameter '".$par_name."' is not a string");
+            throw new Exception("parameter '".$par_name."' is not a string");
     }
 
     private static function validate_array($value, $par_name) {
         if(!is_array($value) || substr(json_encode($value), 0, 1) !== '[')
-            throw new Error("parameter '".$par_name."' is not an array");
+            throw new Exception("parameter '".$par_name."' is not an array");
     }
 
     private static function validate_object($value, $par_name) {
         if(!is_array($value) || substr(json_encode($value, true), 0, 1) !== '{')
-            throw new Error("parameter '".$par_name."' is not an object");
+            throw new Exception("parameter '".$par_name."' is not an object");
     }
 
     private static function validate_alphanumeric($value, $par_name) {
         Qlite::validate_string($value, $par_name);
         if(!ctype_alnum($value))
-            throw new Error("parameter '".$par_name."' contains illegal characters, only alphanumeric characters (a-z, 0-9) are allowed");
+            throw new Exception("parameter '".$par_name."' contains illegal characters, only alphanumeric characters (a-z, 0-9) are allowed");
     }
 
 
