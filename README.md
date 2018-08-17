@@ -458,7 +458,7 @@ Writes a message into the iam stream at an index position.
 #### example call
 ```php
 try {
-    $res = $qlite->iam_write('CLUZILAWASDZAPQXWQHWRUBNXDFITUDFMBSBVAGB9PVLWDSYADZBPXCIOAYOEYAETUUNHNW9R9TZKU999', 17, {'day': 4});
+    $res = $qlite->iam_write('CLUZILAWASDZAPQXWQHWRUBNXDFITUDFMBSBVAGB9PVLWDSYADZBPXCIOAYOEYAETUUNHNW9R9TZKU999', 17, array('day' => 4));
     // process $res ...
 } catch (Error $err) {
     echo $err; // handle error
