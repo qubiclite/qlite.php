@@ -2,7 +2,7 @@
 
 class Qlite {
 
-    private static $VERSION = "ql-0.4.0";
+    private static $VERSION = "0.4.1";
 
     private $qlnode_url;
 
