@@ -68,10 +68,11 @@ class Qlite {
             throw new Exception("parameter '".$par_name."' contains illegal characters, only alphanumeric characters (a-z, 0-9) are allowed");
     }
 
+    
     /**
      * Gives details about this ql-node.
      * @return array decoded from json, unparsed success example:
-     *     {"duration":"42","iota_node":"https://nodes.devnet.iota.org:443","success":true,"testnet":true,"version":"0.4.1"}
+     *     {"duration":"42","iota_node":"https://nodes.devnet.thetangle.org:443","success":true,"testnet":true,"version":"0.5.0"}
      * */
     public function node_info() {
         $request = array('command' => 'node_info');
@@ -94,7 +95,7 @@ class Qlite {
 
     /**
      * Determines the quorum based result (consensus) of a qubic's epoch.
-     * @param string $qubic qubic to fetch from, e.g. 'X9JSBIJVTEIDLFFVEMCSHPVDLB9TAQMUWZNKKNHFAPALVS9GQWDYYBJVAKMJM9ESJMDLOOMFCYFPPYNPE'
+     * @param string $qubic qubic to fetch from, e.g. 'CIVZQYMDDDHVBTYFWUEQQNSGCNO9TMVPGOSCEXEYEKMMUUTWXRVJNGHRAJZYJUFUVVRQLTITDCNTQZTNX'
      * @param int $epoch epoch to fetch, e.g. 4
      * @param int $epoch_max (optional) if used will fetch all epochs from 'epoch' up to this value, e.g. 7
      * @return array decoded from json, unparsed success example:
@@ -110,9 +111,9 @@ class Qlite {
 
     /**
      * Transforms an entity (iam stream, qubic or oracle) into a string that can be imported again.
-     * @param string $id id of the entity to export, e.g. 'SSQKBXQBNJH9PNTPZMRAORMBLVPHCBJJAQNLRRDRM9XUZXCMS9CAVJRVZTGGZEUGOZQKBSLKCWNCKRCWO'
+     * @param string $id id of the entity to export, e.g. 'YVLICKIQDN9DDWPYCSHQAIRUDJWOQWDDIAXIKSIRFFO9HNQMYGJWBWQIFCLRRDRJDNNYQUZWNABZXVGY9'
      * @return array decoded from json, unparsed success example:
-     *     {"duration":"42","success":true,"export":"q_GZPZLHVWJWETGHIBXWLPMALNTG9UABFXVYSMIUEDIMAPYYLPSQOYCUQQAEULWNGFFTIOYSCD9H9OJB999_GUACEZHVFAEZEYGUACEZGQFEFFGOAGHSDAHCFCEZGUACEZGDFAABABEYEVJVIDABGBJLFQGNICDRHUBCGSEEDWDZEOFPCDICHGEHHOEYCPGCHJAACCIBGKIZHPINHKGGIBETIJHHANIIESCLCRENCGGUEOCXBBIFJCDJABHFAAGBGYJFEKIWIQCDJBAZIABLBKBFBFEAFCJRFOGGCOHZCHBPDJEWCDCSFZEQHFIHDZCSBOBMFTFNFCETADEODFCRGCCPFAGZIEFRIKFUARGWEOJLELBUGPIRDJGOEHEKGGFBFXBDDDHSEZCTFAFTEYAXIQIAAPFTGHFJCYBYASCFACBIEDAEFJEIIIGAENFAABABEYEPDTBGAFDIBBHHDQCXCIBRIMHACEIHCFJPAUBVCHESHEECACERIHHWFJHHFFACIXIBIJIHAOCGDGIJHZDYJHFFFOABAACAHTFUJHGHEAHWGMFUFRCDDBFHGWAMCUBMDTHGFUJQALIEJSANGMDSBJBUGCGPBZBMJLARJEBJJVFJESGFGZISEJETISJQEZGIHFCYBKEJCKBOIBAQAJBOADDRDTIKDXBFFEASALIWIOAAJRIFGJIUEZHWHFEWDBHTGOFCFUFAFSIEBLCUBTFAEYADFTIKCFHYDOEYILAPAUBMGWBYAP"}
+     *     {"duration":"42","success":true,"export":"q_BGBKIXLBEUTKP9FEMEGPQPSDTPLOZBXJARRPCTHOWYFPMQQ9JZZJCYVRUCIBNSKF9HPRYCYFCTRXLJ999_GUACEZHVFAEZEYGUACEZGQFEFFGOAGHSDAHCFCEZGUACEZGDFAABABEYEVJVIDABGBJLFQGNICDRHUBCGSEEDWDZEOFPCDICHGEHHOEYCPGCHJAACCIBGKIZHPINHKGGIBETIJHHANIIESCLCRENCGGUEOCXBBIFJCDJABHFAAGBGYJFEKIWIQCDJBAZIABLBKBFBFEAFCJRFOGGCOHZCHBPDJEWCDCSFZEQHFIHDZCSBOBMFTFNFCETADEODFCRGCCPFAGZIEFRIKFUARGWEOJLELBUGPIRDJGOEHEKGGFBFXBDDDHSEZCTFAFTEYAXIQIAAPFTGHFJCYBYASCFACBIEDAEFJEIIIGAENFAABABEYEPDTBGAFDIBBHHDQCXCIBRIMHACEIHCFJPAUBVCHESHEECACERIHHWFJHHFFACIXIBIJIHAOCGDGIJHZDYJHFFFOABAACAHTFUJHGHEAHWGMFUFRCDDBFHGWAMCUBMDTHGFUJQALIEJSANGMDSBJBUGCGPBZBMJLARJEBJJVFJESGFGZISEJETISJQEZGIHFCYBKEJCKBOIBAQAJBOADDRDTIKDXBFFEASALIWIOAAJRIFGJIUEZHWHFEWDBHTGOFCFUFAFSJEHVIAHIDFFUCTJRIPJNAOAJCLIUDCGHADGIDRGM"}
      * */
     public function export($id) {
         $this->validate_tryte_sequence($id, '$id', 81, 81);
@@ -134,9 +135,9 @@ class Qlite {
 
     /**
      * Reads the specification of any qubic, thus allows the user to analyze that qubic.
-     * @param string $qubic id of the qubic to read, e.g. 'GMZNAMAHNSSLNLDLIXWEXETS9COXYCWOCSDNTVWCAZBKQWUZ9ZOOSVQV9AGVRZNCEXRJMELZL9MXMPLWN'
+     * @param string $qubic id of the qubic to read, e.g. 'YZXSGDLDRTFAFIBDPCBBXYEIHZRWELXVGDINCQLIBEBZDBY9KWZMFOURIXPXHXPPSQTFRSRQXIGZNMRVS'
      * @return array decoded from json, unparsed success example:
-     *     {"assembly_list":["EZHK9YJBMQQMSOCXVBREZZ9NDZZZYNU9IDIKSURBEPUEXWIHIWTAMOGGWQHIRAJJQWYMLANWOAHMO9ONT"],"duration":"42","code":"return(epoch^2);","hash_period_duration":20,"result_period_duration":10,"success":true,"runtime_limit":10,"execution_start":1534864149,"id":"DLQYAKPMOTCTKJKYXBHEDBBJFVXOEKTTIPBMLKWWPLDMRXDWUEPJOZPZPHXUFEWYISIZSCYWISCFSB999","version":"ql-0.4.1"}
+     *     {"assembly_list":["RIFRDCDBZUECJQSTPUIPMOONUDVBCKPNFXNGJTTNJWELTLPPXOH9B9JNAWPFWZXMJAQJZCATKR9CLHUL9"],"duration":"42","code":"return(epoch^2);","hash_period_duration":20,"result_period_duration":10,"success":true,"runtime_limit":10,"execution_start":1537595169,"id":"VNQKWHDEDTCZVJQSMMLUPUAU9AALKEARI9CHWCYFXQ9VWNPZWHWNNMKZPBPAWVRHMTYSBVR9SZPYFS999","version":"ql-0.5.0"}
      * */
     public function qubic_read($qubic) {
         $this->validate_tryte_sequence($qubic, '$qubic', 81, 81);
@@ -147,7 +148,7 @@ class Qlite {
     /**
      * Lists all qubics stored in the persistence.
      * @return array decoded from json, unparsed success example:
-     *     {"duration":"42","success":true,"list":[{"specification":{"code":"return('hello world');","hash_period_duration":20,"result_period_duration":10,"execution_start":1534864150,"run_time_limit":10,"type":"qubic transaction","version":"ql-0.4.1"},"id":"PEIBSVNBFQASBULSZQEHXSOAZMFIJPDDZTAIZPFXX9AUTBGPESJEQW9OEPYKYXK9ZANWGZKBVVZSRH999","state":"assembly phase"}]}
+     *     {"duration":"42","success":true,"list":[{"specification":{"code":"return('hello world');","hash_period_duration":20,"result_period_duration":10,"execution_start":1537595170,"run_time_limit":10,"type":"qubic transaction","version":"ql-0.5.0"},"id":"RKR9PYBNREGTFAERMXTD9ZOBWSHHFFXELG9ILH9LKQFEXPCZK9WUIELNSPHQVYAPDRYPUXRNNSHXXT999","state":"assembly phase"}]}
      * */
     public function qubic_list() {
         $request = array('command' => 'qubic_list');
@@ -162,7 +163,7 @@ class Qlite {
      * @param int $runtime_limit maximum amount of seconds the QLVM is allowed to run per epoch before aborting (to prevent endless loops), e.g. 10
      * @param string $code the qubic code to run, e.g. 'return(epoch^2);'
      * @return array decoded from json, unparsed success example:
-     *     {"duration":"42","success":true,"qubic_id":"RZXCTLDRGNOUJHFEBQFIAGYEPZKLCUOSLAEDZCECKSAZ9TXTJHWCCMXVOYITPLJYOPBLUMOXQSMNLKYHU"}
+     *     {"duration":"42","success":true,"qubic_id":"PEAXNFYKMHHDZTVABHGMVZDEZJCZRYYBL9KDDXIBZBAGEZXCFXUZULWPROGZAEOYAIUDVSXARUOLWCVO9"}
      * */
     public function qubic_create($execution_start, $hash_period_duration, $result_period_duration, $runtime_limit, $code) {
         $execution_start = (int)$execution_start; $this->validate_integer($execution_start, '$execution_start', 1, 2147483647);
@@ -176,7 +177,7 @@ class Qlite {
 
     /**
      * Removes a qubic from the persistence (private key will be deleted: cannot be undone).
-     * @param string $qubic deletes the qubic that starts with this tryte sequence, e.g. 'HNWGHRFFRJCPXALLQPMICTLYJKUJQMN9JROQIJWJGALWVGDMRDIGJCTLPMWWVRUBBKUIDXUOYEQUVLDNL'
+     * @param string $qubic deletes the qubic that starts with this tryte sequence, e.g. '9C9KCKTFAJZK9OFIHEECGFUWYESO99SOXZMCGCOWXGVQQIOSPJZI9ZKZFGLE9KGZ9DLJLYR9DOQULSIRO'
      * @return array decoded from json, unparsed success example:
      *     {"duration":"42","success":true}
      * */
@@ -188,9 +189,9 @@ class Qlite {
 
     /**
      * Lists all incoming oracle applications for a specific qubic, response can be used for 'qubic_assembly_add'.
-     * @param string $qubic the qubic of which you want to list all applications, e.g. 'IPKWPUQRXINLPN9UIKRIF9DQTGCCGTEZUNQ9PPHZCXMR9SRAU9BKBFKTGSVHYQRRHLWIIRKZQXVIGV9ES'
+     * @param string $qubic the qubic of which you want to list all applications, e.g. 'ETATZZETOKMM9FWPHUPUNXUUXTPBQYTIUPKFFYKQVPBIPSCVDOYKLRQVBXDNRQWXTUEQB9HYFNASYDDVU'
      * @return array decoded from json, unparsed success example:
-     *     {"duration":"42","success":true,"list":["XLSTKSX9HVZMIDCCEMEYTFCAXZQIRMAGRZAWDOVBSZLUQIAHVPUZVVGOBIPEQMRHYXYOVVWTPBTDFNXGK","HVXBVSVRXUAPPSNMTMTEHENLERUJYWVRBSDQSFDBGHNZXL9TEKLGTGWGHAPLUYUHBAWSXEUKOJFXGSM9F"]}
+     *     {"duration":"42","success":true,"list":["FJSYCRISJHUZOUGZDML9NQNZLCBFPEEBDJFHZSNIHVIJPCRXWJPDG9JBGKFOWSHQFSOFQY9MCX9EHYMJQ","99QSSBAMFHJZRAJPNV9LJUJOHDDGZ9VXEC9IYPABZYWIENIFIVLJBQPKYOW9O9RGLPCPKQ9BWHPUUOUHI"]}
      * */
     public function qubic_list_applications($qubic) {
         $this->validate_tryte_sequence($qubic, '$qubic', 81, 81);
@@ -200,8 +201,8 @@ class Qlite {
 
     /**
      * Publishes the assembly transaction for a specific qubic.
-     * @param string $qubic the qubic that shall publish its assembly transaction, e.g. 'AOBFFJPJ9HAPGCTEFRLYAFGPATRDIJQAKYU9NCLFUOOVGGRQXLAXPX9ZGVLHVAWTAGRLASXNVASDIH9EP'
-     * @param array $assembly json array of the oracle IDs to be part of the assembly, e.g. ['WPYBUHPYYZKAELWFXVLEGRNCKGHIYLDHMHNQECXLPBBII9CPGHWBVDQZGFVJALWLZZXODPQIZANZFGWKL', 'USAGVUYNHEC9CCFQPAPUBXUE9RYRPGPFAYX9PQ9GAEPKCETZMEGDGNZHBKMTATVDGYMLRRZPPXQPIOLML']
+     * @param string $qubic the qubic that shall publish its assembly transaction, e.g. 'FUBNEIMBGQXCYMIVDOHQWYILWTJRRUNXQJBHUCIBWTMEDWQPHCN9CLOVKUFRNANTGJCXZTFI9RDKHTQA9'
+     * @param array $assembly json array of the oracle IDs to be part of the assembly, e.g. ['HRDLRALANLBTHBHVWYPXBA9WOTTITVTNAOVG9VRINYSTCAHAMTOTGCRDCFMTRXGCSZFILIWSQRD9NJQQQ', 'LBJPOGAQFWHKGBHLJPM9RWDOUCDXLCWFSLADDBUDBQFAZROZLQZDKRXRIVQTLWWNQGYYDFNB99MBUYHQY']
      * @return array decoded from json, unparsed success example:
      *     {"duration":"42","success":true}
      * */
@@ -228,8 +229,8 @@ class Qlite {
 
     /**
      * Determines the quorum based consensus of a qubic's oracle assembly at any IAM index.
-     * @param string $qubic qubic to find consensus in, e.g. 'WESADDNSAKXVEOJPZXHYWCZAGGL9WWHLTJGBMANBZTDO9HMDSSSEAJWQDFMVXTYLLUSZEWAPLRFMJVFYO'
-     * @param string $keyword keyword of the iam index to find consensus for, e.g. 'M'
+     * @param string $qubic qubic to find consensus in, e.g. 'ZFIZEDOYVKAZYTTCBEV9LGBSPOIWDAGMGTUKOASOGUKPDQQAVQBJFMNTAXSXAHHI9IQFAWNRMHXTATBEY'
+     * @param string $keyword keyword of the iam index to find consensus for, e.g. 'W'
      * @param int $position position of the iam index to find consensus for, e.g. 4
      * @return array decoded from json, unparsed success example:
      *     {"result":"{'color': 'red'}","duration":"42","success":true,"index_keyword":"COLORS","quorum":3,"quorum_max":4,"index_position":2018}
@@ -244,9 +245,9 @@ class Qlite {
 
     /**
      * Creates a new oracle and stores it in the persistence. Life cycle will run automically, no more actions required from here on.
-     * @param string $qubic ID of the qubic which shall be processed by this oracle., e.g. 'PTLEWVIGPENWGINOCAZAAEREMYUGBHRUUCWXBSLQEBRTRI9MEKKCS9PRIHNHUDEPPDNQDJHUFZYCENG9H'
+     * @param string $qubic ID of the qubic which shall be processed by this oracle., e.g. 'QHOPEZLOALZPKEVROWVSWJBPNXRJLJATBCIKGOOBEBERJMBAPGA9MWBQ9XVJZOLYMICFCNXCKGVWXUMAD'
      * @return array decoded from json, unparsed success example:
-     *     {"duration":"42","oracle_id":"9BOOAGMLHRAFCKHKPJCHHNITTDROEZVPWZATDAYNYXGJRDMYOULPMEJKIMFTVKWMKJAHRGBREVLNRJOSP","success":true}
+     *     {"duration":"42","oracle_id":"CZMV9BMIHBRUJWIHHAJJLHQ9LMWMJDVZIYIODQLPWK9AETIATVRAGV9AZ9DV9NRQSCBRRPHOFAIWYUKMR","success":true}
      * */
     public function oracle_create($qubic) {
         $this->validate_tryte_sequence($qubic, '$qubic', 81, 81);
@@ -256,7 +257,7 @@ class Qlite {
 
     /**
      * Removes an oracle from the persistence (private key will be deleted, cannot be undone).
-     * @param string $id oracle ID, e.g. 'QHIENOBGKHZREXIFVRVLWRXD9AYFKYEONFPZJNQVRTETRPWO9CEDHPMINKGGTECFDFJGZLSKWFMJHG9DW'
+     * @param string $id oracle ID, e.g. 'ICYFZZS9JCMPYDDTE9BZ9FBOLPUZDQLTYHYKNMN9JLLGD9VDSDTY9AYKE9KAOWLMUPSNLAWNFQYIBMRJY'
      * @return array decoded from json, unparsed success example:
      *     {"duration":"42","success":true}
      * */
@@ -269,7 +270,7 @@ class Qlite {
     /**
      * Lists all oracles stored in the persistence
      * @return array decoded from json, unparsed success example:
-     *     {"duration":"42","success":true,"list":["EXSAAGLCTQERAVPEKPPLUURJZUXAX9OXSWCBQNLLZHNRMPGVPXBSOXZ9COEKBQ9Q9NADPQXKJYLBKZYTF","BKVOIHKYJXSUABLBTIBHXZNZGZTHCXRMFPGINLNCXLLEMANFFAJXBIQSLTZPUGBGSMYJTHZHJSXCEPLDW"]}
+     *     {"duration":"42","success":true,"list":["QMZPI9UBOHGDDTXOKGXAUO9UTAWVALNZCGGJZOGRFXYJMISTYLCONHNYKECTNGATBADOYQZXTVLH9U9LD","KSNGWECMOPDWWEXLKZYTFJRRPCKVOM9PLYRCHSHTM9CNXSIFHCBKXPUWJGSEGQQLAPUVUXJMQTCTMUK9H"]}
      * */
     public function oracle_list() {
         $request = array('command' => 'oracle_list');
@@ -278,7 +279,7 @@ class Qlite {
 
     /**
      * Temporarily stops an oracle from processing its qubic after the epoch finishes. Can be undone with 'oracle_restart'.
-     * @param string $id oracle ID, e.g. 'PSPVZKVJOHJLHBERUT9TX9UTLWJTEFZIBDXVPK99IKXCZJEBQDW9CUQDOG9JCGWOIJFECJJJWOAAFGZBK'
+     * @param string $id oracle ID, e.g. 'EOJIZIEVRP9GFQAAFZDEWDFGMGBKMLYXDODJUIUURONWICKPVLPKEKLQFJBBHEPJRESIIYRRRRVNHKGKP'
      * @return array decoded from json, unparsed success example:
      *     {"duration":"42","success":true}
      * */
@@ -290,7 +291,7 @@ class Qlite {
 
     /**
      * Restarts an oracle that was paused with 'oracle_pause', makes it process its qubic again.
-     * @param string $id oracle ID, e.g. 'YOZPFUGWSDNQATJKNWOYMRZXIFARDRVTLSVYFXBAOGY9JQFFZVNCEJMUERNHNCLOGGOKANYQRMHFKITOU'
+     * @param string $id restarts the oracle that starts with this tryte sequence, e.g. 'DVCZGOL9POLHMOZYBHFEGYRIQBGDYTHXZWVYVSEJKXCY9LFLLXSVSYMJUGYMROTYKHWGJUIWKCKHUWRSA'
      * @return array decoded from json, unparsed success example:
      *     {"duration":"42","success":true}
      * */
@@ -303,7 +304,7 @@ class Qlite {
     /**
      * Creates a new IAM stream and stores it locally in the persistence.
      * @return array decoded from json, unparsed success example:
-     *     {"duration":"42","iam_id":"VGLAKGVGZKZHAWUPPTIDBKOCAYFKCZPHZRRQOWGFBHYJWH9NZHUOV9FLCNZGFAABK9LVZOO9A9PMKOPOQ","success":true}
+     *     {"duration":"42","iam_id":"JRYGMAEWZWIDCERMDPWJGCWIGLGLRMPBQBDXVRIOZSPTJTCFY99YSDGQQMYHGWYCRBVLX9GISPUWEVFZI","success":true}
      * */
     public function iam_create() {
         $request = array('command' => 'iam_create');
@@ -325,7 +326,7 @@ class Qlite {
     /**
      * List all IAM streams stored in the persistence.
      * @return array decoded from json, unparsed success example:
-     *     {"duration":"42","success":true,"list":["9BZGKNPGHMMTMPOFGBFLCUEUOVDPWYRUKI9WPYFDHQQRHHICMHSPEYEVVK9PMOCVMDTXIPVLDQHOSN9JM","ZGDOKOHPWHMQTFETVTEUYUZNQWDFWYWPSIQCVFAD9SVTGKR9NJWCLBYKUFBBXJPZ9CKL9KAWHGS9QLVVK"]}
+     *     {"duration":"42","success":true,"list":["KVN9ILICRPDGWCPCYXAAOKCXLURBKSKYOSQTGHQJBQDYEWPAR9UZ9NBASKFJRMACEAGIDLJUECWBRFTJQ","HSRVQRJWMBWMBEMIMNPWOIUTSIDAHSRENYDWDI9UGENTAHGTXICEJBUDPTTBNENWEX9HKGLXYDTEUSAOZ"]}
      * */
     public function iam_list() {
         $request = array('command' => 'iam_list');
@@ -335,30 +336,34 @@ class Qlite {
     /**
      * Writes a message into the iam stream at an index position.
      * @param string $id the IAM stream in which to write, e.g. 'CLUZILAWASDZAPQXWQHWRUBNXDFITUDFMBSBVAGB9PVLWDSYADZBPXCIOAYOEYAETUUNHNW9R9TZKU999'
-     * @param int $index index at which to write, e.g. 17
+     * @param int $index position of the index at which to write, e.g. 17
      * @param object $message the json object to write into the stream, e.g. {'day': 4}
+     * @param string $keyword (optional) keyword of the index at which to write, e.g. 'ADDRESS'
      * @return array decoded from json, unparsed success example:
      *     {"duration":"42","success":true}
      * */
-    public function iam_write($id, $index, $message) {
+    public function iam_write($id, $index, $message, $keyword = '') {
         $this->validate_tryte_sequence($id, '$id', 81, 81);
         $index = (int)$index; $this->validate_integer($index, '$index', 0, 2147483647);
         $this->validate_object($message, '$message');
-        $request = array('command' => 'iam_write', 'ID' => $id, 'index' => $index, 'message' => $message);
+        $this->validate_tryte_sequence($keyword, '$keyword', 0, 30);
+        $request = array('command' => 'iam_write', 'ID' => $id, 'index' => $index, 'message' => $message, 'keyword' => $keyword);
         return $this->send_request($request);
     }
 
     /**
      * Reads the message of an IAM stream at a certain index.
      * @param string $id IAM stream you want to read, e.g. 'CLUZILAWASDZAPQXWQHWRUBNXDFITUDFMBSBVAGB9PVLWDSYADZBPXCIOAYOEYAETUUNHNW9R9TZKU999'
-     * @param int $index index from which to read the message, e.g. 17
+     * @param int $index position of index from which to read the message, e.g. 17
+     * @param string $keyword (optional) keyword of index from which to read the message, e.g. 'RESULTS'
      * @return array decoded from json, unparsed success example:
      *     {"duration":"42","read":{"habit":"antarctica","name":"penguin"},"success":true}
      * */
-    public function iam_read($id, $index) {
+    public function iam_read($id, $index, $keyword = '') {
         $this->validate_tryte_sequence($id, '$id', 81, 81);
         $index = (int)$index; $this->validate_integer($index, '$index', 0, 2147483647);
-        $request = array('command' => 'iam_read', 'id' => $id, 'index' => $index);
+        $this->validate_tryte_sequence($keyword, '$keyword', 0, 30);
+        $request = array('command' => 'iam_read', 'id' => $id, 'index' => $index, 'keyword' => $keyword);
         return $this->send_request($request);
     }
 
@@ -386,7 +391,7 @@ class Qlite {
 
     /**
      * Uninstalls an app.
-     * @param string $app app ID (directory name in 'qlweb/qlweb-0.4.1/qapps'), e.g. 'tanglefarm'
+     * @param string $app app ID (directory name in 'qlweb/qlweb-0.5.1/qapps'), e.g. 'tanglefarm'
      * @return array decoded from json, unparsed success example:
      *     {"duration":"42","success":true}
      * */
