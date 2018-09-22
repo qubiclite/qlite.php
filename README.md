@@ -53,6 +53,7 @@ try {
     * [iam_write](#iam_write)
     * [iam_read](#iam_read)
 * General
+    * [node_info](#node_info)
     * [change_node](#change_node)
     * [fetch_epoch](#fetch_epoch)
     * [export](#export)
@@ -67,6 +68,24 @@ try {
 ***
 ## FUNCTIONS
 
+### `node_info()`
+Gives details about this ql-node.
+#### parameters
+no parameters
+#### example call
+```php
+try {
+    $res = $qlite->node_info();
+    // process $res ...
+} catch (Exception $exc) {
+    echo $exc; // handle exception
+}
+```
+#### example response (before being parsed into a php array)
+```json
+{"duration":42,"iota_node":"https://nodes.devnet.thetangle.org:443","success":true,"testnet":true,"version":"0.5.0"}
+```
+***
 ### `change_node()`
 Changes the IOTA full node used to interact with the tangle.
 #### parameters
@@ -99,7 +118,7 @@ Determines the quorum based result (consensus) of a qubic's epoch.
 #### example call
 ```php
 try {
-    $res = $qlite->fetch_epoch('JCIIGIOKLSIZYYFMYNWULBBYMKZQWDZMUHCQXCMKIYVQVRHSKDWOCCTTGDFEZLMMQBGGMTTWQHUGZSWWH', 4, 7);
+    $res = $qlite->fetch_epoch('RKSECWM9WKAIZPNPCBVDAEONYYRENWCYQWESPOIWWORHAACWXBCOCCMMWIFVL9GDZFRIHZYOMVQMARMWN', 4, 7);
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -111,7 +130,7 @@ try {
 ```
 ***
 ### `export()`
-transforms an entity (iam stream, qubic or oracle) into a string that can be imported again
+Transforms an entity (iam stream, qubic or oracle) into a string that can be imported again.
 #### parameters
 | name | type | description |
 | - | - | - |
@@ -119,7 +138,7 @@ transforms an entity (iam stream, qubic or oracle) into a string that can be imp
 #### example call
 ```php
 try {
-    $res = $qlite->export('GTOAKBQOXLKCAJJV9SRBGCYEVNIOYKJK9MMCBWCJR9JVURYOBSZKNZLJFTNMARTTJ9PRLUWRKJOG9EXQH');
+    $res = $qlite->export('SJVNTLHKPIPDDIMFFADOLIZHECADWDLBJGRXEYWYWHFSBZDAWUCHRHUCSLUUVDPIJVWFZTQ9KMFSIUMDT');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -127,11 +146,11 @@ try {
 ```
 #### example response (before being parsed into a php array)
 ```json
-{"duration":42,"success":true,"export":"q_FWWALQLLJTEXPASZNFAHOVUEVOWUNPNHBKKUAOKJFHQ9XLQQFKFHHMRJURMUYHRDGBBURYGGBWQAEO999_GUACEZHVFAEZEYGUACEZGQFEFFGOAGHSDAHCFCEZGUACEZGDFAABABEYEVJVIDABGBJLFQGNICDRHUBCGSEEDWDZEOFPCDICHGEHHOEYCPGCHJAACCIBGKIZHPINHKGGIBETIJHHANIIESCLCRENCGGUEOCXBBIFJCDJABHFAAGBGYJFEKIWIQCDJBAZIABLBKBFBFEAFCJRFOGGCOHZCHBPDJEWCDCSFZEQHFIHDZCSBOBMFTFNFCETADEODFCRGCCPFAGZIEFRIKFUARGWEOJLELBUGPIRDJGOEHEKGGFBFXBDDDHSEZCTFAFTEYAXIQIAAPFTGHFJCYBYASCFACBIEDAEFJEIIIGAENFAABABEYEPDTBGAFDIBBHHDQCXCIBRIMHACEIHCFJPAUBVCHESHEECACERIHHWFJHHFFACIXIBIJIHAOCGDGIJHZDYJHFFFOABAACAHTFUJHGHEAHWGMFUFRCDDBFHGWAMCUBMDTHGFUJQALIEJSANGMDSBJBUGCGPBZBMJLARJEBJJVFJESGFGZISEJETISJQEZGIHFCYBKEJCKBOIBAQAJBOADDRDTIKDXBFFEASALIWIOAAJRIFGJIUEZHWHFEWDBHTGOFCFUFAFSHAJNDBIQEWFAAUCADLCAGQAZDEAYDIIFAGAKIUEN"}
+{"duration":42,"success":true,"export":"q_OBMJB9OIQVCRAZMLLTSOULXXTBPQIHBXB9WZNDYLNBZSDSCURGEXUQWEYNEXYMJWUXXBKWQOPINB9D999_GUACEZHWFAEZEYGUACEZGQFEFFGOAGHSDAHCFCEZGUACEZGDFAABABEYEVJVIDABGBJLFQGNICDRHUBCGSEEDWDZEOFPCDICHGEHHOEYCPGCHJAACCIBGKIZHPINHKGGIBETIJHHANIIESCLCRENCGGUEOCXBBIFJCDJABHFAAGBGYJFEKIWIQCDJBAZIABLBKBFBFEAFCJRFOGGCOHZCHBPDJEWCDCSFZEQHFIHDZCSBOBMFTFNFCETADEODFCRGCCPFAGZIEFRIKFUARGWEOJLELBUGPIRDJGOEHEKGGFBFXBDDDHSEZCTFAFTEYAXIQIAAPFTGHFJCYBYASCFACBIEDAEFJEIIIGAENFAABABEYEPDTBGAFDIBBHHDQCXCIBRIMHACEIHCFJPAUBVCHESHEECACERIHHWFJHHFFACIXIBIJIHAOCGDGIJHZDYJHFFFOABAACAHTFUJHGHEAHWGMFUFRCDDBFHGWAMCUBMDTHGFUJQALIEJSANGMDSBJBUGCGPBZBMJLARJEBJJVFJESGFGZISEJETISJQEZGIHFCYBKEJCKBOIBAQAJBOADDRDTIKDXBFFEASALIWIOAAJRIFGJIUEZHWHFEWDBHTGOFCFVFAFTEYAGBWJEIODBJNGZCPCEBAGMIQIZAMIKIWGFBRITBA"}
 ```
 ***
 ### `import()`
-imports a once exported entity (iam stream, qubic or oracle) encoded by a string
+Imports a once exported entity (iam stream, qubic or oracle) encoded by a string.
 #### parameters
 | name | type | description |
 | - | - | - |
@@ -159,7 +178,7 @@ Reads the specification of any qubic, thus allows the user to analyze that qubic
 #### example call
 ```php
 try {
-    $res = $qlite->qubic_read('LUPHJSUHNBBSI9PQTPRPREJPHUMPMQOMVDMQRGDZTEJZBCCJQOOIMLFGM9RNBHEGOMPFQGGERZMRFYVOF');
+    $res = $qlite->qubic_read('GJS9IHSVQQZNVSBPOTF9O9MSAXGEVPATUOZCRONJTI9LSQSU9NXSODAUKTHN9LKGIQKXXMOITOISZRXTA');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -167,7 +186,7 @@ try {
 ```
 #### example response (before being parsed into a php array)
 ```json
-{"assembly_list":["JTVUJUNOXIIWIMYUWQPADKKREQPUVXJF99HYD9XR9SBAGABZVUMPZVVXS9BDZGEGXRRXTIJYVNKHLBCNB"],"duration":42,"code":"return(epoch^2);","hash_period_duration":20,"result_period_duration":10,"success":true,"runtime_limit":10,"execution_start":1534534040,"id":"UF9FKDNFDAFSVWGKQTJLXNESIXPFJMGY9TWWGABSLJGLEEYWVEIQ9ESKHHKBSBWCLCZOOWDFDXYLYE999","version":"ql-0.4-SNAPSHOT"}
+{"assembly_list":["HBZJWXRXYLXM9AHNB9TTCWPTINNABCOPOW9XTZPLKJPZUWPZPKDZQL9XYZAYYOYOMAJGI9MNFWWNA9XNG"],"duration":42,"code":"return(epoch^2);","hash_period_duration":20,"result_period_duration":10,"success":true,"runtime_limit":10,"execution_start":1537595256,"id":"JKPVMXCTZTAUXRAXF9LQYZHERSTCCLLRMFMJWTNK9URRXKRGWTADXOCWRRAJNA9FQKRHOWDCKYPPYI999","version":"ql-0.5.0"}
 ```
 ***
 ### `qubic_list()`
@@ -185,7 +204,7 @@ try {
 ```
 #### example response (before being parsed into a php array)
 ```json
-{"duration":42,"success":true,"list":[{"specification":{"code":"return('hello world');","hash_period_duration":20,"result_period_duration":10,"execution_start":1534534042,"run_time_limit":10,"type":"qubic transaction","version":"ql-0.4-SNAPSHOT"},"id":"NOOFWCOAWM9RWBGODNZTHNOUV99JULTHDWFIYQZCJCA9SYAEPIDTIMZXOVUCPTKLXCZKAJOGLJLMWO999","state":"assembly phase"}]}
+{"duration":42,"success":true,"list":[{"specification":{"code":"return('hello world');","hash_period_duration":20,"result_period_duration":10,"execution_start":1537595259,"run_time_limit":10,"type":"qubic transaction","version":"ql-0.5.0"},"id":"OWGGVWVX9SVMVAY9PJQIQUCXGYLNOSSOSMJBBZOXHIJYRAVDMGSWLIWWAOBVDMDANQLZMMMCXMLRNF999","state":"assembly phase"}]}
 ```
 ***
 ### `qubic_create()`
@@ -209,7 +228,7 @@ try {
 ```
 #### example response (before being parsed into a php array)
 ```json
-{"duration":42,"success":true,"qubic_id":"NGVQFLFXCATOFO9YMZPTRBXN9K9VMUTE9GVYDEAVZ9LHQYUNOZDETRRFVLACSAJIWDCZJWWPVSMIBQPPK"}
+{"duration":42,"success":true,"qubic_id":"OSHCZ9UMFYSYFHY9FJZ9JUVVMTHPGQLZOGKVZFMDRAOKOVGT9SPONLZDJNROHMVFNMNEZPHPQNFVKZFHN"}
 ```
 ***
 ### `qubic_delete()`
@@ -221,7 +240,7 @@ Removes a qubic from the persistence (private key will be deleted: cannot be und
 #### example call
 ```php
 try {
-    $res = $qlite->qubic_delete('EHDF9C99NQEJLHMICKCVOJXYHQHWO9GTZOTVDERXERHCLXDSHDVRPYJXDNTNSYFBJZAEGIBVDIHOTTMEB');
+    $res = $qlite->qubic_delete('9RVVQZM9CKFAIQCOXMLSSGTXTPQEYZDQHFHOMSNOCGFWFZVOIQTBIVDMWEOTUKJQQLNEFS9YY9DSOWQQQ');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -241,7 +260,7 @@ Lists all incoming oracle applications for a specific qubic, response can be use
 #### example call
 ```php
 try {
-    $res = $qlite->qubic_list_applications('HWEYSGHMXSYIKQPEAIGBGQ9UQXYBBSKGWAJTTYXYKLEWGTIT9VWRGYINLHEGTCXCXHAJDGZWONSF9MYTH');
+    $res = $qlite->qubic_list_applications('9XKIPOGHRURQNLMILDJZTOU9UGXBZRWNOYGLUDLINMCPELYCX9JEFCRRSZTG9SHZCOROYKTQXORKTQQVD');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -249,7 +268,7 @@ try {
 ```
 #### example response (before being parsed into a php array)
 ```json
-{"duration":42,"success":true,"list":["9GW9VIPAHJBDXATEVXPTUUWSEQQQAPYKQP9LTGTRTMLIUU9CEQKBOFEUNECYUTWEYJESD9JFACMX9YWNN","AOPBSCCMQINKSBPVSMGLIGSBHRDIDD99ZBEWYVWTYGKFDRUSMVLBKZPJUUTDTDCLAKHNKXIDYKVMFRKFZ"]}
+{"duration":42,"success":true,"list":["VJBTIZUYIQIJWZWYUE9AXZXTARECXRFAANOGXESUTXQEXCUMHNBLGGMQCADFUAM9PAEPTMWXTNE9NMBFF","JUMLSWSOTVCQUJ9HRQ9ZRHHBRC99GJPFDFWPRZDQZEBMIHMSCRJGYKQQRDCHKLHMOL9FPIMVIRKKEBWSP"]}
 ```
 ***
 ### `qubic_assemble()`
@@ -262,7 +281,7 @@ Publishes the assembly transaction for a specific qubic.
 #### example call
 ```php
 try {
-    $res = $qlite->qubic_assemble('UYJIGTXIY9SSJEMMJIYJVQQFSOAXJWQNQYXALSLTDFSLEDFYQUGZQY9VYXZETZFU9MOSEP9LPHN9XRRJK', ['AFPJILZKEFPWXNBUKKHSBHJ9BWJZWIFYYYULQOXHMVWDIRCRLTGLOMVLSHVSTKWYESEJPHSH9MDOMRNIV', 'VRHMTGIWOUKJWLUODHIRMTQSUGTOPRVVEJJG9BDEBFOHK9GIWMRKBFAHQXYQRSCEWRWE9IJVCAOJVFEVS']);
+    $res = $qlite->qubic_assemble('AVEMIZGBLKVEC9C9JOUKHPBDGVYUNOYEXZONAKBUQMCAIYZQGYNEWOEEH9JFRVRWHPT9BBBNUEBSIZPVC', ['UJEMEYZFVHRPKUQPKHBHLIAKETIDRU9TVHYHYTSOMTNIMCYB9ZHOTFLIYNTBMGTLERAKHOVIUKKTNSQGV', 'LHBSKYJOAEDQBITWKEBANK9BMCDDHBOYBMD9XSFEXAIQFBGRRCTNVFTNP9HUYQWBBLIYZLBUSZHHZEJTQ']);
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -305,7 +324,7 @@ Determines the quorum based consensus of a qubic's oracle assembly at any IAM in
 #### example call
 ```php
 try {
-    $res = $qlite->qubic_consensus('ZDMEZRETCZNLJEAMKTDTGMUZQWOIHWTCFLPLLHGFERQQNCUCSVWBEZZLCLND9MHUKPTOQKGAC9YKBMGKP', 'Z', 4);
+    $res = $qlite->qubic_consensus('ZRCWBIDGHKOXUJMGSTGWGWF9KZALDYUBGTNOCFQRWRAEKWSFHRJFFIQYOSQLJT9QJVZEKMXOCMEZLMBUD', 'L', 4);
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -325,7 +344,7 @@ Creates a new oracle and stores it in the persistence. Life cycle will run autom
 #### example call
 ```php
 try {
-    $res = $qlite->oracle_create('ER9BHQDC9ULBNMXXVTTLDQHNJRMQAT9MJNHN9JBMBDZYGHJERVRNRVZBMVEWBQCFDKSRKFLJ9AUDGIXRH');
+    $res = $qlite->oracle_create('QTGMQILKCUGDFELXIDLWKYOBQDSFGCXPITTNK9XXWELJN9AWLWBNGLTBZWXSYTK9QSAJTTTFUK9VRVAIG');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -333,7 +352,7 @@ try {
 ```
 #### example response (before being parsed into a php array)
 ```json
-{"duration":42,"oracle_id":"OWHHQMSLXLOE9QFXEYOUJRFZBGM9MNQPOUYTFMPBYQVBJOQLEULXBOCX9WLUX9WXFOPGAILOKIGBPYIPS","success":true}
+{"duration":42,"oracle_id":"EIT9OBGLPOE9AULSUTJMZAMUYDCDJFBOAMMDRUOVYHJLWMIPVKARATEWVSVYIQHPTBUPJCLNJDSOBYQPH","success":true}
 ```
 ***
 ### `oracle_delete()`
@@ -345,7 +364,7 @@ Removes an oracle from the persistence (private key will be deleted, cannot be u
 #### example call
 ```php
 try {
-    $res = $qlite->oracle_delete('XWC9DB9SDQVQASRIOAU9GEZWOLMGXDUUGSNHVSPEHSOTMHYRRYFXVFRHTDFKYAPBVBDZRTYRYJIPSCZWN');
+    $res = $qlite->oracle_delete('PIMLCQXIUGDELO9KP9WYKWJSLJYGHCCGRHGLKA9EIFXUOXYINLREWGQMBYFKDBHLPFSGBPZGOOEDPWKGU');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -371,7 +390,7 @@ try {
 ```
 #### example response (before being parsed into a php array)
 ```json
-{"duration":42,"success":true,"list":["VWXCGKBEXEZZZLQT9EGELOZIG9HTZCYZZEQPXUAZQGSRZDKBKIPSFSGKMHVFRWBYEKFZYFVIJGOIQIKNR","NLOYS9OWAQLLVPIRAA99DGLRNJMKCFZQDBGILKMCLOXCEFYHLSLYHUPBWOAUAFLQZJJCBPTXZQHCSBZJJ"]}
+{"duration":42,"success":true,"list":["UXZGKWZZWABVH9VUQNFINGEWQCAYNVHGTHTBWQFY9DYIRCFSHOJSMUPGSDHIBNWUYLQNSHHLROCNSSNEX","TAXSBHU9JEFZS9MNTCWDAOCKVXDUUAJPUHONTJPBRMUKF9RRQSB99NZOHFTJPAMTVXBWKNYEXAZAUHMTO"]}
 ```
 ***
 ### `oracle_pause()`
@@ -383,7 +402,7 @@ Temporarily stops an oracle from processing its qubic after the epoch finishes. 
 #### example call
 ```php
 try {
-    $res = $qlite->oracle_pause('TDTTOOFWROZGGFKHIRYWZOAHMWHXIIOZPBTWXVNTRPNVAUSTVRMYUGUARUWOTZZKMBRZDXXHWMLOEBMTE');
+    $res = $qlite->oracle_pause('GTWWMHONBSK9QBEIFUJBOH9XXKNWYDNAVKDKJSVJIW9UTFXGGJDFDTIPSIQNEOXALTXMDORLEPEPKFLBQ');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -399,11 +418,11 @@ Restarts an oracle that was paused with 'oracle_pause', makes it process its qub
 #### parameters
 | name | type | description |
 | - | - | - |
-| `$id`  | `string (trytes{81})` | oracle ID
+| `$id`  | `string (trytes{81})` | restarts the oracle that starts with this tryte sequence
 #### example call
 ```php
 try {
-    $res = $qlite->oracle_restart('CQXNEKHYIUYEAUMRZUYWFBHSHQVYMQNQVRBF9YNPGHTRHGUAQGBSKWYRGQTPMTTIZSHGDEEEMPKMNQJGU');
+    $res = $qlite->oracle_restart('ISOLNKK9FFPMDZTT9IGOL9XXCDF9IJMQAEMXABLCGACQMINDSNLEGHHSTZDCIACWIRXC9GSRMASMRJZZJ');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -429,7 +448,7 @@ try {
 ```
 #### example response (before being parsed into a php array)
 ```json
-{"duration":42,"iam_id":"QYZZCFSRLRLDZLNRDM9IG9LPTCYUIATTNVJUWENLCHDUYBRW9JRJIHZGIFWSBCYQISCLGLMAFBEGMEIDH","success":true}
+{"duration":42,"iam_id":"CYBTQYRSSYKWFU9VCVZMHBBRUNQQQMDZWZXFAOZN9AORIPNKBCRBUYBRMZCHOKEZY9JVWFBRIQVEGSNC9","success":true}
 ```
 ***
 ### `iam_delete()`
@@ -467,7 +486,7 @@ try {
 ```
 #### example response (before being parsed into a php array)
 ```json
-{"duration":42,"success":true,"list":["NKQAXWRNBWDHPQQKWZQPWDVEMVGFNITKRN9FDNBMTZXKDLHVYSPLDORTPJZFSXWHTMIXXHTYMNWTF999E","SLKKBEQUYYAWTSCDTB9QPD9NBJLD9ZTUTE9O9OJPFMLWNVKBNEKJJYGYEQNMWMBBWPYGXCQUOQVTIDGDC"]}
+{"duration":42,"success":true,"list":["EAHFRRZAWYUYBG9XU9TNIBRJLTAIAFLWMVTFPUNYNPMVPKQBTDOPARUHVELPKWQGCSCZNCHXWIHODXYGM","TFPUVQE9AFVWZMSUIIVYUHXKFVFJDWGTBWCPKYLXSKGSZGWSWSCXDVJRPYCO99ZMWPLGGIX9DQANZFGVR"]}
 ```
 ***
 ### `iam_write()`
@@ -476,12 +495,13 @@ Writes a message into the iam stream at an index position.
 | name | type | description |
 | - | - | - |
 | `$id`  | `string (trytes{81})` | the IAM stream in which to write
-| `$index`  | `int (integer{0-2147483647})` | index at which to write
+| `$index`  | `int (integer{0-2147483647})` | position of the index at which to write
 | `$message`  | `object (jsonobject)` | the json object to write into the stream
+| `$keyword`  (opt.) | `string (trytes{0-30})` | keyword of the index at which to write
 #### example call
 ```php
 try {
-    $res = $qlite->iam_write('CLUZILAWASDZAPQXWQHWRUBNXDFITUDFMBSBVAGB9PVLWDSYADZBPXCIOAYOEYAETUUNHNW9R9TZKU999', 17, {'day': 4});
+    $res = $qlite->iam_write('CLUZILAWASDZAPQXWQHWRUBNXDFITUDFMBSBVAGB9PVLWDSYADZBPXCIOAYOEYAETUUNHNW9R9TZKU999', 17, {'day': 4}, 'ADDRESS');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -498,11 +518,12 @@ Reads the message of an IAM stream at a certain index.
 | name | type | description |
 | - | - | - |
 | `$id`  | `string (trytes{81})` | IAM stream you want to read
-| `$index`  | `int (integer{0-2147483647})` | index from which to read the message
+| `$index`  | `int (integer{0-2147483647})` | position of index from which to read the message
+| `$keyword`  (opt.) | `string (trytes{0-30})` | keyword of index from which to read the message
 #### example call
 ```php
 try {
-    $res = $qlite->iam_read('CLUZILAWASDZAPQXWQHWRUBNXDFITUDFMBSBVAGB9PVLWDSYADZBPXCIOAYOEYAETUUNHNW9R9TZKU999', 17);
+    $res = $qlite->iam_read('CLUZILAWASDZAPQXWQHWRUBNXDFITUDFMBSBVAGB9PVLWDSYADZBPXCIOAYOEYAETUUNHNW9R9TZKU999', 17, 'RESULTS');
     // process $res ...
 } catch (Exception $exc) {
     echo $exc; // handle exception
@@ -556,7 +577,7 @@ Uninstalls an app.
 #### parameters
 | name | type | description |
 | - | - | - |
-| `$app`  | `string (alphanumeric)` | app ID (directory name in 'qlweb/qlweb-0.4.0/qapps')
+| `$app`  | `string (alphanumeric)` | app ID (directory name in 'qlweb/qlweb-0.5.1/qapps')
 #### example call
 ```php
 try {
